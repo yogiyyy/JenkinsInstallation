@@ -1,0 +1,25 @@
+#!/bin/bash
+sudo yum update -y
+sudo yum install java-1.8.0
+sudo wget -O /etc/yum.repos.d/jenkins.repo \
+    https://pkg.jenkins.io/redhat/jenkins.repo
+sudo rpm --import https://pkg.jenkins.io/redhat/jenkins.io.key
+sudo yum install jenkins
+sudo service jenkins start
+
+---------------------Find the password-------------
+
+cd /var/lib/jenkins/secrets/
+cat initialAdminPassword
+
+
+------------------ Change default port --------------
+
+cat /etc/sysconfig/jenkins
+vim /etc/sysconfig/jenkins  ----- change the default port
+sudo service jenkins stop
+sudo service jenkins start
+
+-------------------Reset password --------------------
+
+cd /var/lib/jenkins/users       ----open config.xml file & then change the password # value using online # genrator
